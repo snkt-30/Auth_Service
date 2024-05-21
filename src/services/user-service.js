@@ -7,9 +7,11 @@ class UserService {
 
   async create(data) {
     try {
+      
       const userRepository = new UserRepository();
       const user = await userRepository.create(data);
       return user;
+
     } catch (error) {
       console.log(error);
       throw { error: "Something went wrong in service layer" };
