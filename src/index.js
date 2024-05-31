@@ -5,11 +5,12 @@ const apiRoutes = require("./Routes/index");
 const app = express();
 
 // const { User } = require("./models/index");
-const serviceRepository = require("./services/user-service");
+// const serviceRepository = require("./services/user-service");
 
 const { PORT,JWT_KEY } = require("./config/serverConfig");
 
 function setupAndStartServer() {
+  
   app.listen(PORT, async () => {
 
     // middlewares
@@ -18,21 +19,12 @@ function setupAndStartServer() {
 
     app.use("/api", apiRoutes);
 
-    const serviceRepo = new serviceRepository();
+    // const serviceRepo = new serviceRepository();
                                                                               
     // const token = serviceRepo.createToken({email:'Wedding@gmail.com',id:'3'});
     // console.log(token);
-
     // const reponse = serviceRepo.verifyToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IldlZGRpbmdAZ21haWwuY29tIiwiaWQiOiIzIiwiaWF0IjoxNzE3MDU3NzkwLCJleHAiOjE3MTcwNjEzOTB9.gCnpzGc9WVrzlTFooGLGr1VGzFx5ZyinmdQoepbVk4E');
     // console.log(reponse);
-
-    // const user = await userRepository.getById(2);
-    // console.log(user);
-    // const incomingPassword = '123456';
-    // const user = await User.findByPk(2);
-    // console.log(user);
-    // const response = bcrypt.compareSync(incomingPassword,user.password);
-    // console.log(response);
 
     console.log(`Server Started at PORT ${PORT}`);
   });

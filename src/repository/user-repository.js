@@ -26,12 +26,31 @@ class UserRepository {
 
   async getById(userId) {
     try {
-      const user = await User.findByPk(userId,{
-        attributes:['email','id','password']
+      const user = await User.findByPk(userId, {
+        attributes: ["email", "id", "password"],
       });
       return user;
     } catch (error) {
       console.log("something went wrong on repository level");
+      throw error;
+    }
+  }
+
+  async getByEmail(userEmail) {
+    try {
+      const user = await User.findOne({
+        where: {
+          email: userEmail,
+        },
+      });
+
+      if (user == null) {
+        console.log(`No user found with ${userEmail} in database`);
+        throw error;
+      }
+      return user;
+    } catch (error) {
+      console.log("Something went wrong while fetching user using email");
       throw error;
     }
   }
