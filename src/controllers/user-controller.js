@@ -30,7 +30,6 @@ const create = async (req, res) => {
 const singIn = async (req, res) => {
   try {
      const response = await userService.singIn(req.body.email, req.body.password); 
-
      return res.status(200).json({
       data:response,
       success: true,
@@ -47,7 +46,30 @@ const singIn = async (req, res) => {
   }
 };
 
+
+const isAuthenticated = async (req,res)=>{
+  try {
+    // console.log(req.headers);
+      const token = req.headers['x-access-token'];
+      const response = await userService.isAuthenticated(token);
+      return res.status(200).json({
+        data:response,
+        success:true,
+        message:"User is authenticated",
+        err:{}
+      })
+  } catch (error) {
+    return res.status(500).json({
+      data:{},
+      success: true,
+      message:"Signed In is not successful",
+      err :error
+     })
+  }
+}
+
 module.exports = {
   create,
   singIn,
+  isAuthenticated,
 };
